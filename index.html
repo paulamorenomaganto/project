@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Passwords</title>
+    </head>
+
+    <body>
+        <h1>Passwords app</h1>
+        {% if user.is_authenticated %}
+        <h2>Add password</h2>
+        <form action="addPassword/" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="site">Site: </label>
+                <input type="text" name="site" />
+            </div>
+            <div>
+                <label for="sitePassword">Password: </label>
+                <input type="text" name="sitePassword" />
+            </div>
+            <input type="submit" value="Add">
+        </form>
+        <hr>
+        <ul>
+            <li><a href="passwords/{{user.id}}/">Password list</a></li>
+        </ul>
+        <form action="logout/" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Logout" />
+        </form>
+        {% else %}
+        <p>here you can check your passwords.</p>
+        <p>For registering, use this form.</p>
+
+        <form action="register/" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="username">Username: </label>
+                <input type="text" name="username" />
+            </div>
+            <div>
+                <label for="password">Password: </label>
+                <input type="password" name="password" />
+            </div>
+            <input type="submit" value="Register">
+        </form>
+        <hr>
+        <p>If you already have an account <a href="login/">log-in.</a></p>
+        {% endif %}
+    </body>
+</html>
